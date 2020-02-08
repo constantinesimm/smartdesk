@@ -4,29 +4,33 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
-const logger = require('morgan');
-const { devLoggerStream, prodLoggerStream } = require('./server/service/logger/logger');
+const morgan = require('morgan');
+const { loggerOptions, loggerStream } = require('./server/services/logger');
+const mongoDB = require('./server/services/database/mongo/mongoose');
 
 const server = express();
 
+//connect mongo database
+mongoDB()
+    .then( () => console.log('MongoDB connected'))
+    .catch(error => console.log(`MongoDB connection error with message: "${ error }"`));
+
 //security middleware
-app.use(cors());
-app.use(helmet.xssFilter());
-app.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
+server.use(cors());
+server.use(helmet.xssFilter());
+server.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
 
-//log middleware, write all requests to access.log
-if (process.env.NODE_ENV === 'production') {
-  app.use(logger('common', { stream: prodLoggerStream }));
-} else {
-  //write to file
-  app.use(logger('common', { stream: devLoggerStream }));
-  //show in console
-  app.use(logger('dev'));
-}
+//logger middleware write all requests to ./server/logs
+server.use(morgan(loggerOptions.template, { stream: loggerStream }));
+//logger middleware, dev mode show all requests in console
+server.use(morgan('dev'));
 
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: false }));
-server.use(cookieParser());
+//parser middleware
+server.use(cookieParser());         //cookie
+server.use(bodyParser.json());      //application/json
+server.use(bodyParser.urlencoded({  //application/x-www-form-urlencoded
+    extended: true
+}));
 
 //static paths and files
 server.use(express.static(path.join(__dirname, 'dist')));
