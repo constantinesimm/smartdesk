@@ -135,4 +135,4 @@ The Client can be accessed by hitting the document root:
 
 The Server can be accessed by hitting the document root:
 
-`localhost:3000/` Will send you to the build client application.
+`localhost:3000/` Will send you to the build client application
