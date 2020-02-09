@@ -44,10 +44,14 @@
 			</b-field>
 
 			<!-- Firstname & Lastname fields -->
-			<b-field grouped>
+			<b-field grouped style="margin-bottom: 0">
 				<b-field label="Firstname" label-position="on-border"
 						 :type="{ 'is-danger': firstnameField['isInvalid'], 'is-success': firstnameField['isValid'] }"
-						 :message="{ 'This firstname is incorrect format': firstnameField['isInvalid'] }">
+						 :message="[
+						 	{ 'This firstname is incorrect format': firstnameField['isInvalid'] },
+						 	{ 'This firstname must have at least 4 and max 20 characters': firstnameField['isInvalid'] },
+						 	{ 'This firstname must have only Latin/Cyrillic characters': firstnameField['isInvalid'] }
+						 ]">
 
 					<b-input v-model="firstnameField['value']" type="text" maxlength="20" placeholder="John" expanded
 							 @input="validate(firstnameField['value'], 'firstnameField', 'name')"/>
@@ -55,15 +59,19 @@
 
 				<b-field label="Lastname" label-position="on-border"
 						 :type="{ 'is-danger': lastnameField['isInvalid'], 'is-success': lastnameField['isValid'] }"
-						 :message="{ 'This lastname is incorrect format': lastnameField['isInvalid'] }">
+						 :message="[
+						 	{ 'This lastname is incorrect format': firstnameField['isInvalid'] },
+						 	{ 'This lastname must have at least 4 and max 20 characters': lastnameField['isInvalid'] },
+						 	{ 'This lastname must have only Latin/Cyrillic characters': lastnameField['isInvalid'] }
+						 ]">
 
 					<b-input v-model="lastnameField['value']" type="text" maxlength="20" placeholder="Doe" expanded
 							 @input="validate(lastnameField['value'], 'lastnameField', 'name')"/>
 				</b-field>
 			</b-field>
 
-			<!-- Gender & Language selects -->
-			<b-field grouped>
+			<!-- Gender / Language / Date of Birthday selects -->
+			<b-field grouped class="user-info-fields">
 				<b-field label="Gender" label-position="on-border"
 						 :type="{'is-success': genderSelect['selected'] !== null }">
 
@@ -81,6 +89,12 @@
 						<option value="uk"> Українська </option>
 						<option value="ru"> Русский </option>
 					</b-select>
+				</b-field>
+
+				<b-field label="Date of birth" label-position="on-border">
+					<b-datepicker v-model="birthdayCalendar['value']" editable placeholder="Type or select a date..."
+								  :first-day-of-week="birthdayCalendar['firstDayOfWeek']"
+								  icon-pack="far" icon="calendar-alt" icon-prev="arrow-alt-circle-left" icon-next="arrow-alt-circle-right"/>
 				</b-field>
 			</b-field>
 
@@ -166,6 +180,10 @@
 					selected: 'en',
 					isValid: true
 				},
+				birthdayCalendar: {
+					value: null,
+					firstDayOfWeek: 1
+				},
 				secretField: {
 					isValid: false,
 					isInvalid: false,
@@ -207,6 +225,9 @@
 				this.validate(value, field, type);
 				//compare password and password confirm fields
 				this.secretConfirmField['isCompare'] = value !== this.secretField['value'];
+			},
+			showCalendar(v) {
+				console.log(v.toLocaleDateString())
 			}
 		}
     }
@@ -253,6 +274,9 @@
 	}
 	.field.is-grouped {
 		justify-content: space-between;
+	}
+	.field.user-info-fields.is-grouped > div {
+		width: 30%;
 	}
 	.field.is-grouped > div {
 		width: 48%;
