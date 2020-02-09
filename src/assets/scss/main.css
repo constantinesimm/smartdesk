@@ -1,0 +1,19 @@
+/* Error: expected ";".
+ *   ,
+ * 3 | $black:        hsl(0, 0%, 4%) !default
+ *   |                                       ^
+ *   '
+ *   _variables.scss 3:39     @import
+ *   _theme-default.scss 2:9  @import
+ *   main.scss 2:9            root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: expected ";".\a   \2577 \a 3 \2502  $black:        hsl(0, 0%, 4%) !default\d\a   \2502                                        ^\a   \2575 \a   _variables.scss 3:39     @import\a   _theme-default.scss 2:9  @import\a   main.scss 2:9            root stylesheet';
+}
