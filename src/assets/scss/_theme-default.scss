@@ -1,20 +1,20 @@
 /* We'll need some initial vars to use here */
-@import "~bulma/sass/utilities/initial-variables";
+@import "./_variables";
 
 /* Base: Size  */
 $size-base: 1rem;
 $default-padding: $size-base * 1.5;
 
 /* Base: Color */
-$base-color: #051d38;
+$base-color: #2780E3;
 $base-color-light: #f5f8fa;
-$base-gradient: linear-gradient(to right, $base-color, #1e344c);
+$base-gradient: linear-gradient(to right, $base-color, #2780E3);
 
 /* Override Primary */
-$primary: #203752;
+$primary: #2780E3;
 
 /* Default font */
-$family-sans-serif: "IBM Plex Sans", sans-serif;
+$family-sans-serif: 'Ubuntu', sans-serif;
 
 /* Body */
 $body-background-color: $base-color-light;
@@ -50,6 +50,7 @@ $card-header-shadow: none;
 
 /* Card: specifics */
 $card-header-border-bottom-color: $base-color-light;
+$card-header-background-color: $primary;
 
 /* Table: Bulma override */
 $table-cell-border: 1px solid $white-bis;

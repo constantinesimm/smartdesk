@@ -1,47 +1,21 @@
 <template>
   <div id="app">
-	  <nav-bar />
-	  <aside-menu />
-	  <main role="main">
-		  <router-view />
-	  </main>
+	  <router-view />
   </div>
 </template>
 
 <script>
-	import NavBar from "./components/navbar/NavBar";
-	import AsideMenu from "./components/aside/AsideMenu";
-
 	export default {
-		components: {
-			AsideMenu,
-			NavBar
-		}
+		name: 'app'
 	}
 </script>
 <style lang="scss">
-	#server {
-	  font-family: Avenir, Helvetica, Arial, sans-serif;
-	  -webkit-font-smoothing: antialiased;
-	  -moz-osx-font-smoothing: grayscale;
-	  text-align: center;
-	  color: #2c3e50;
-	}
-
-	#nav {
-	  padding: 30px;
-
-	  a {
-		font-weight: bold;
-		color: #2c3e50;
-
-		&.router-link-exact-active {
-		  color: #42b983;
-		}
-	  }
-	}
-
-	aside.aside.is-expanded + main {
-
+	#app {
+		height: 100vh;
+		width: 100vw;
+		font-family: 'Ubuntu', sans-serif!important;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		background-color: rgba(243, 243, 244, 0.05)!important;
 	}
 </style>
