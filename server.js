@@ -17,23 +17,26 @@ mongoDB()
     .then( () => console.log('MongoDB connected'))
     .catch(error => console.log(`MongoDB connection error with message: "${ error }"`));
 
-//security middleware
+//app middleware
+//security
 server.use(cors());
 server.use(helmet.xssFilter());
 server.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
 
-server.use(morgan(loggerOptions.template, { stream: loggerStream }));
-if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
-
-//parser middleware
+//parser
 server.use(cookieParser());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-//passport middleware
+//passport
 require('./server/middleware/passport')(passport);
 server.use(passport.initialize());
 server.use(passport.session(sessionOptions));
+
+//logs
+server.use(morgan(loggerOptions.template, { stream: loggerStream }));
+if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
+
 
 //static paths and files
 server.use(express.static(path.join(__dirname, 'dist')));
@@ -42,15 +45,17 @@ server.get('*', (req, res) => res.sendFile('index.html', { root: 'dist'}));
 //API controllers
 server.use('/api/users', require('./server/controllers/api/users'));
 
+
 //catch 404 and forward to error handler
 server.use('*', (req, res, next) => {
 	if (res.status(404)) next(createError(404, `Not found route: "${req.baseUrl}"`));
 });
 
-//central error handler middleware
+//main error handler
 server.use((err, req, res, next) => {
 	let errStatus = err.status || 500;
 	let errMessage = err.message || 'Server Internal Error';
+
 	//validator middleware change exception status code and message
 	if (errStatus === 422) errStatus = 400; errMessage = errMessage.split(': /')[0];
 
