@@ -57,12 +57,11 @@
 							 @input="validate(firstnameField['value'], 'firstnameField', 'name')"/>
 				</b-field>
 
-				<b-field label="Lastname" label-position="on-border"
-						 :type="{ 'is-danger': lastnameField['isInvalid'], 'is-success': lastnameField['isValid'] }"
+				<b-field label="Lastname" label-position="on-border" :type="{ 'is-danger': this.lastnameField['isInvalid'],'is-success': this.lastnameField['isValid'] }"
 						 :message="[
-						 	{ 'This lastname is incorrect format': firstnameField['isInvalid'] },
-						 	{ 'This lastname must have at least 4 and max 20 characters': lastnameField['isInvalid'] },
-						 	{ 'This lastname must have only Latin/Cyrillic characters': lastnameField['isInvalid'] }
+						 	{ 'This lastname is incorrect format': this.firstnameField['isInvalid'] },
+						 	{ 'This lastname must have at least 4 and max 20 characters':  this.lastnameField['isInvalid'] },
+						 	{ 'This lastname must have only Latin/Cyrillic characters':  this.lastnameField['isInvalid'] }
 						 ]">
 
 					<b-input v-model="lastnameField['value']" type="text" maxlength="20" placeholder="Doe" expanded
@@ -92,9 +91,10 @@
 				</b-field>
 
 				<b-field label="Date of birth" label-position="on-border">
-					<b-datepicker v-model="birthdayCalendar['value']" editable placeholder="Type or select a date..."
-								  :first-day-of-week="birthdayCalendar['firstDayOfWeek']"
-								  icon-pack="far" icon="calendar-alt" icon-prev="arrow-alt-circle-left" icon-next="arrow-alt-circle-right"/>
+					<b-datepicker v-model="birthdayCalendar['value']" @input="showCalendar" :first-day-of-week="birthdayCalendar['firstDayOfWeek']"
+								  :years-range="[-50, 2]" :focused-date="new Date('2000-01-01T00:00:01.000Z')"
+								  icon-pack="far" icon="calendar-alt" icon-prev="arrow-alt-circle-left" icon-next="arrow-alt-circle-right"
+								  editable placeholder="Type or select a date..."/>
 				</b-field>
 			</b-field>
 
@@ -227,7 +227,7 @@
 				this.secretConfirmField['isCompare'] = value !== this.secretField['value'];
 			},
 			showCalendar(v) {
-				console.log(v.toLocaleDateString())
+				console.log(this.birthdayCalendar['value'])
 			}
 		}
     }
