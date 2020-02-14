@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import RegisterForm from "../../components/card/RegisterForm";
+	import RegisterForm from "../../components/forms/RegisterForm";
 
     export default {
         name: "RegisterPage",

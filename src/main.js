@@ -1,9 +1,10 @@
 /* Styles */
-import './assets/scss/main.scss';
+import './services/vee-validate';
 
 /* Core */
 import Vue from 'vue';
 import Buefy from "buefy";
+import './assets/flatly/bulmaswatch.scss';
 
 /* Router & Store */
 import router from './router';
@@ -16,6 +17,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Buefy, {
 	defaultIconPack: 'fas',
+  defaultFieldLabelPosition: 'on-border',
 	defaultToastDuration: 5000,
 	defaultToastPosition: 'is-top'
 });

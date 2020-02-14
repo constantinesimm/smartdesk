@@ -1,0 +1,27 @@
+@import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
+body {
+    padding: 0; margin: 0;
+}
+input {
+    border-radius: 4px!important;
+    border-color: #dbdbdb!important;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+input, label {
+    background-color: white!important;
+}
+
+.input[disabled] {
+    background-color: whitesmoke!important;
+}
+label.has-text-success + div > div > div.dropdown-trigger > div > input {
+    border-color: #3abb67!important;
+}
+
+label.has-text-danger + div > div > div.dropdown-trigger > div > input {
+    border-color: #f14668!important;
+}

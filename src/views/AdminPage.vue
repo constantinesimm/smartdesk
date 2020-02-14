@@ -1,10 +1,10 @@
 <template>
 	<div class="app-admin">
-		<header class="app-header" v-if="$store.getters.isLoggedIn">
+		<header class="app-header" v-if="!$store.getters.isLoggedIn">
 			<Navbar/>
 		</header>
 		<section class="app-container">
-			<Aside v-if="$store.getters.isLoggedIn"/>
+			<Aside v-if="!$store.getters.isLoggedIn"/>
 			<main role="main" class="app-main-content">
 				<router-view />
 			</main>

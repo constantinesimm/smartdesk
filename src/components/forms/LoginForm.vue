@@ -1,0 +1,141 @@
+<template>
+  <div class="card">
+    <header class="card-header">
+      <div class="card-header-title has-text-white">
+        <b-icon icon="lock" size="is-medium"/>
+        <span class="is-size-4 card-header-title-text">Authentication</span>
+      </div>
+    </header>
+    <div class="card-content">
+      <BInputWithValidation rules="required|email" data-label="Email" data-type="email" data-placeholder="email@example.com" v-model="email"/>
+      <BInputWithValidation rules="required|password" data-label="Password" data-type="password" data-placeholder="Type your password" v-model="secret"/>
+
+      <b-field class="login-button-field">
+        <b-button type="is-primary" class="login-button" label="Login" expanded :loading="isLoadingButton" :disabled="!(this.email && this.secret)"/>
+      </b-field>
+    </div>
+    <footer class="card-footer">
+      <b-field class="auth-buttons-fields" grouped>
+        <b-button @click="showPasswordRestoreModal" type="is-text" class="has-text-primary" label="Forgot Password?"
+                  inverted outlined/>
+        <b-button @click="showRegisterModal" type="is-text" class="has-text-primary" label="Register" inverted
+                  outlined/>
+      </b-field>
+    </footer>
+  </div>
+</template>
+
+<script>
+  import forgotPassword from "./modal/forgotPassword";
+  import registerUser from "./modal/registerUser";
+  import BInputWithValidation from '../../components/inputs/BInputWithValidation';
+
+  export default {
+    name: "LoginForm",
+    components: {
+      BInputWithValidation
+    },
+    data() {
+      return {
+        email: '',
+        secret: '',
+        isLoadingButton: false
+      }
+    },
+    methods: {
+      showPasswordRestoreModal() {
+        this.$buefy.modal.open({
+          parent: this,
+          component: forgotPassword,
+          hasModalCard: true
+        })
+      },
+      showRegisterModal() {
+        this.$buefy.modal.open({
+          parent: this,
+          component: registerUser,
+          hasModalCard: true
+        })
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .card {
+    width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 -5px 25px 0 rgba(0, 0, 0, 0.05), 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .card-header {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+  }
+
+  .card-header-title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-header-title-text {
+    padding-left: 5px;
+  }
+
+  .field-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .login-button-field {
+    margin-top: 1.5rem;
+  }
+
+  .login-button-field > .control {
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-button {
+    cursor: pointer;
+  }
+
+  .login-button[disabled] {
+    cursor: no-drop;
+  }
+
+  .button.is-text {
+    text-decoration: none;
+  }
+
+  .button.is-text:hover {
+    background: #0000000d;
+    opacity: .8;
+  }
+
+  .card-footer {
+    padding: 0.5rem 1rem;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  @media screen and (max-width: 499px) {
+    .card-footer {
+      justify-content: center;
+    }
+
+    .auth-buttons-fields {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    .auth-buttons-fields {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+</style>
