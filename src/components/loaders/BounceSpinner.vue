@@ -1,0 +1,22 @@
+<template>
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</template>
+
+<script>
+  export default {
+    name: 'BounceSpinner',
+    data() {
+      return {
+
+      }
+    }
+  }
+</script>
+
+<style scoped lang="css">
+  @import "../../assets/scss/components/spinners/bounce.css";
+</style>

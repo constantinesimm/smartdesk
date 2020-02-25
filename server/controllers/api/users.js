@@ -19,9 +19,7 @@ router.post('/login', publicRoute, validator(schemas.loginPOST, 'body'), asyncHa
 		req.logIn(user, (err) => {
 			if (err) {
 				return next(createError(500, err));
-			}
-
-			else {
+			} else {
 				user.secret['token'] = createAuthToken(user._id);
 
 				user.save((err, result) => {
