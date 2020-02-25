@@ -1,23 +1,28 @@
-let { join } = require('path');
+let {join} = require('path');
 
 module.exports = {
-    chainWebpack(config) {
-        config.plugins.delete('preload');
-        config.plugins.delete('prefetch');
+  devServer: {
+    host: 'smartdesk',
+    port: 8080,
+    disableHostCheck: true
+  },
+  chainWebpack(config) {
+    config.plugins.delete('preload');
+    config.plugins.delete('prefetch');
 
-        config
-            .plugin('html')
-            .tap(args => {
-                args[0] = {
-                    template: join(__dirname, './public/index.html'),
-                    minify: {
-                        removeComments: true,
-                        collapseWhitespace: false,
-                        removeAttributeQuotes: false
-                    }
-                };
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0] = {
+          template: join(__dirname, './public/index.html'),
+          minify: {
+            removeComments: true,
+            collapseWhitespace: false,
+            removeAttributeQuotes: false
+          }
+        };
 
-                return args;
-            })
-    }
+        return args;
+      })
+  }
 };

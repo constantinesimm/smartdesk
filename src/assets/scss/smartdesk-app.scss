@@ -1,0 +1,57 @@
+/*
+ * SmartDesk Web Application
+ * Project URL: https://github.com/constantinesimm/smartdesk
+ * Based on: Shards UI Kit v2.0.3 (https://designrevision.com/downloads/shards)
+ * Based on: Bootstrap v4.1.1 (https://getbootstrap.com)
+ * Copyright 2020-* Konstantin Peschanov (constantine.peschanov@gmail.com)
+ * License: MIT
+ */
+
+// Shards variables overrides.
+@import "_overrides";
+
+// Base Shards UI Kit
+@import "~shards-ui/src/scss/shards";
+
+// Core
+@import "_variables";
+
+// Components
+@import "_reboot";
+@import "_buttons";
+@import "_button-group";
+@import "_navbar";
+@import "_badge";
+@import "_alert";
+@import "_input-group";
+@import "_custom-forms";
+@import "_custom-sliders";
+@import "_images";
+@import "_icons";
+@import "_dropdown";
+@import "_card";
+@import "_utilities";
+@import "_tooltip";
+
+// Blocks
+@import "blocks/_admin-navbar";
+@import "blocks/_admin-sidebar";
+@import "blocks/_main-content";
+@import "blocks/_main-footer";
+@import "blocks/_page-header";
+
+// Templates
+@import "templates/_common"; // Required common styles for all pages.
+@import "templates/_blog-overview";
+@import "templates/_blog-add-new-post";
+
+// Plugins
+@import "plugins/_quill";
+@import '~vue-cookie-accept-decline/dist/vue-cookie-accept-decline.css';
+
+// Components
+@import "components/_card-post";
+@import "components/_error";
+
+// Pages
+@import "pages/account/account-card";

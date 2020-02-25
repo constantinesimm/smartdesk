@@ -10,6 +10,7 @@ const passport = require('passport');
 const { loggerOptions, loggerStream } = require('./server/services/logger');
 const { sessionOptions } = require('./server/config');
 const createError = require('http-errors');
+
 const server = express();
 
 //connect mongo database
@@ -44,7 +45,6 @@ server.get('*', (req, res) => res.sendFile('index.html', { root: 'dist'}));
 
 //API controllers
 server.use('/api/users', require('./server/controllers/api/users'));
-
 
 //catch 404 and forward to error handler
 server.use('*', (req, res, next) => {
