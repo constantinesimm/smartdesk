@@ -41,19 +41,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "public-ip": "^4.0.0",
-    "quill": "^1.3.6"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-router": "~4.2.0",
-    "@vue/cli-plugin-vuex": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
-    "concurrently": "^5.0.2",
-    "cors": "^2.8.5",
-    "dotenv": "latest",
-    "node-sass": "^4.13.1",
-    "nodemon": "^1.19.2",
-    "sass-loader": "^8.0.2",
+    "quill": "^1.3.6",
     "vue-chartjs": "^3.5.0",
     "vue-template-compiler": "^2.6.11",
     "vue": "^2.6.11",
@@ -70,6 +58,18 @@
     "shards-ui": "^2.1.0",
     "shards-vue": "^1.0.4",
     "ua-parser-js": "^0.7.21"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-plugin-router": "~4.2.0",
+    "@vue/cli-plugin-vuex": "~4.2.0",
+    "@vue/cli-service": "~4.2.0",
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "latest",
+    "node-sass": "^4.13.1",
+    "nodemon": "^1.19.2",
+    "sass-loader": "^8.0.2"
   },
   "repository": {
     "type": "git",
