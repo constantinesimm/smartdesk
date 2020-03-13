@@ -4,7 +4,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const mongoDB = require('./server/services/database/mongoose');
@@ -22,7 +21,7 @@ mongoDB()
 
 //app middleware
 //security
-server.use(cors());
+if (process.env.NODE_ENV !== 'production') server.use(require('cors')());
 server.use(helmet.xssFilter());
 server.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
 
