@@ -1,0 +1,13 @@
+$vt-color-info: #006fe6 !default;
+$vt-color-success: #4caf50 !default;
+$vt-color-warning: #ffb400 !default;
+$vt-color-error: #ff5252 !default;
+
+// Import the regular Vue Toastification stylesheets (or create your own)
+@import "~vue-toastification/src/scss/_variables";
+@import "~vue-toastification/src/scss/_toastContainer";
+@import "~vue-toastification/src/scss/_toast";
+@import "~vue-toastification/src/scss/_closeButton";
+@import "~vue-toastification/src/scss/_progressBar";
+@import "~vue-toastification/src/scss/_icon";
+@import "~vue-toastification/src/scss/animations/_slideBlurred";

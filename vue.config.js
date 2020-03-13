@@ -1,8 +1,8 @@
-let {join} = require('path');
+const { join } = require('path');
 
 module.exports = {
   devServer: {
-    host: 'smartdesk',
+    host: 'localhost',
     port: 8080,
     disableHostCheck: true
   },

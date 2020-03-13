@@ -38,7 +38,6 @@ server.use(passport.session(sessionOptions));
 server.use(morgan(loggerOptions.template, { stream: loggerStream }));
 if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
 
-
 //static paths and files
 server.use(express.static(path.join(__dirname, 'dist')));
 server.get('*', (req, res) => res.sendFile('index.html', { root: 'dist'}));
@@ -46,20 +45,17 @@ server.get('*', (req, res) => res.sendFile('index.html', { root: 'dist'}));
 //API controllers
 server.use('/api/users', require('./server/controllers/api/users'));
 
-//catch 404 and forward to error handler
-server.use('*', (req, res, next) => {
-	if (res.status(404)) next(createError(404, `Not found route: "${req.baseUrl}"`));
-});
-
 //main error handler
 server.use((err, req, res, next) => {
 	let errStatus = err.status || 500;
 	let errMessage = err.message || 'Server Internal Error';
 
 	//validator middleware change exception status code and message
-	if (errStatus === 422) errStatus = 400; errMessage = errMessage.split(': /')[0];
+	if (errStatus === 422) errStatus = 400;
+	errMessage = errMessage.split(': /')[0];
 
-	return res.status(errStatus).send(errMessage);
+  console.log('err', errStatus)
+  res.status(errStatus).json({ message: errMessage })
 });
 
 module.exports = server;

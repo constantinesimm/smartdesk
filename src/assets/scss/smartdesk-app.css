@@ -1,6 +1,6 @@
 /* Error: Can't find stylesheet to import.
  *    ,
- * 14 | @import "~shards-ui/src/scss/shards";
+ * 14 | @import "~shards-ui/toasts/scss/shards";
  *    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *    '
  *   smartdesk-app.scss 14:9  root stylesheet */

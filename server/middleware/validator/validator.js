@@ -27,13 +27,8 @@ const validator = (schema, property) => {
 		const { error } = Joi.validate(req[property], schema);
 		const valid = error == null;
 
-		if (valid) { next() }
-		else {
-			const { details } = error;
-			const message = details.map(i => i.message).join(',');
-
-			next(createError(422, message));
-		}
+		if (valid) next();
+		else next(createError(422, error['details'].map(i => i.message).join(',')));
 	}
 };
 module.exports = {

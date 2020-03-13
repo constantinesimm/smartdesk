@@ -10,7 +10,7 @@
     if (d.querySelectorAll('a[href="#"]').length) removeEmptyLinks();
     else setTimeout(removeEmptyLinks, 200);
     /* end remove hash from links */
-  });
+  }, false);
 })(document);
 
 

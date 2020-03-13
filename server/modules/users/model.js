@@ -26,6 +26,25 @@ const UserSchema = new Schema({
 			default: null
 		}
 	},
+  access: {
+    expiresAt: {
+      type: Date,
+      default: null
+    },
+    token: {
+      type: String,
+      default: null
+    },
+    identity: {
+      type: String,
+      default: null
+    },
+    role: {
+      type: String,
+      default: 'client',
+      enum: ['client', 'manager', 'admin', 'super']
+    }
+  },
 	service: {
 		token: {
 			type: String,
@@ -35,31 +54,16 @@ const UserSchema = new Schema({
 			type: Boolean,
 			default: false
 		},
-		accessExpires: {
-			type: Date,
-			default: null
-		},
 		fakeUser: {
 			type: Boolean,
 			default: false
 		}
 	},
-	access: {
-		role: {
-			type: String,
-			default: 'client',
-			enum: ['client', 'manager', 'admin', 'super']
-		}
-	},
 	secret: {
-		token: {
-			type: String,
-			default: null
-		},
 		hash : {
 			type: String
 		}
 	}
-}, { collection: 'users', timestamp: { updatedAt: 'updatedAt' } });
+}, { collection: 'users', timestamps: { updatedAt: 'service.updatedAt', createdAt: 'service.createdAt' } });
 
 module.exports = mongoose.model('User', UserSchema);

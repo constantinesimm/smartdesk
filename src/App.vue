@@ -8,13 +8,21 @@
 </template>
 
 <script>
-  import AcceptCookie from "./components/modal/AcceptCookie";
+  import AcceptCookie from "./views/components/modal/AcceptCookie";
+  import ls from './plugin/ls-secure';
 
   export default {
     components: {
       AcceptCookie
     },
-		computed: {
+    created() {
+      console.log(ls.getItem('sd-auth__secured') ? ls.getItem('sd-auth__secured') : 'ls is empty')
+      if (ls.getItem('sd-auth__secured')) {
+        this.$store.replaceState(ls.getItem('sd-auth__secured'))
+      }
+
+    },
+    computed: {
 		  layout() {
 		    return `${ this.$route.meta.layout || 'default' }-layout`;
       }
@@ -26,7 +34,7 @@
 		font-family: 'Ubuntu', sans-serif!important;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		background-color: rgba(243, 243, 244, 0.05)!important;
+		background-color: #e1e5ebc4!important;
 	}
   .material-icons.md-18 {
     font-size: 18px!important;

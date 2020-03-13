@@ -3,7 +3,7 @@ export default function () {
     {
       title: ' Dashboard',
       to: {
-        path: 'dashboard',
+        path: '/admin/dashboard',
       },
       htmlBefore: '<i class="far fa-chart-bar fa-lg"></i>',
       htmlAfter: '',
@@ -16,14 +16,14 @@ export default function () {
           title: ' List all',
           htmlBefore: '<i class="fas fa-users"></i>',
           to: {
-            path: 'users/all',
+            path: '/admin/users/list/all',
           },
         },
         {
           title: ' Manual import',
           htmlBefore: '<i class="fas fa-file-import"></i>',
           to: {
-            path: 'users/manual-import',
+            path: '/admin/users/manage/import',
           },
         }
       ]

@@ -1,14 +1,17 @@
 const router = require('express').Router();
-const passport = require('passport');
-const createError = require('http-errors');
-const asyncHandler = require('express-async-handler');
 const { publicRoute, privateRoute } = require('../../middleware/api-guard');
 const { validator, schemas } = require('../../middleware/validator/validator');
 
 const User = require('../../modules/users/model');
 const service = require('../../modules/users/service');
-const { createAuthToken } = require('../../modules/users/helpers');
 
+router.post('/login', publicRoute, validator(schemas.loginPOST, 'body'), (req, res, next) => {
+  service.authenticate(req, res)
+    .then(result => res.json(result))
+    .catch(error => next(error));
+});
+
+/*
 router.post('/login', publicRoute, validator(schemas.loginPOST, 'body'), asyncHandler(async (req, res, next) => {
 	await passport.authenticate('local', { session: false },(err, user, info) => {
 		console.log(user);
@@ -30,28 +33,30 @@ router.post('/login', publicRoute, validator(schemas.loginPOST, 'body'), asyncHa
 							auth: true, user: user, token: user.secret.token
 						})
 					}
+					next()
 				})
 			}
 		})
 	})(req, res, next)
 }));
+ */
 
-router.post('/logout', privateRoute, asyncHandler(async (req, res, next) => {
-	await User.findOne({ 'secret.token': req.headers['x-access-token']}, (error, user) => {
-		if (error) throw createError(500, error);
-		if (!user) return next(createError(401, 'Session is over, need to login!'));
-		else {
-			user.secret['token'] = null;
+router.post('/logout', (req, res, next) => {
+  service.loggedOut(req, res)
+    .then(response => res.json(response))
+    .catch(error => next({status: error.status || 400, message: error.message}));
+});
 
-			user.save((err, result) => {
-				if (err) return next(createError(500, err));
-				if (result) {
-					delete req.headers['x-access-token'];
-					return res.status(200).json('See you soon!');
-				}
-			})
-		}
-	});
-}));
+router.post('/register/new', (req, res, next) => {
+  service.registerInvite(req, res, next)
+    .then(response => res.json(response))
+    .catch(error => next({status: error.status || 400, message: error.message}));
+});
+
+router.post('/register/:userId/complete/:token', (req, res, next) => {
+  service.registerComplete(req, res, next)
+    .then(response => res.json(response))
+    .catch(error => next({status: error.status || 400, message: error.message}))
+});
 
 module.exports = router;

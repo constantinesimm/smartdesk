@@ -4,9 +4,12 @@ const bcrypt = require('bcryptjs');
 const { controlString } = require('../../config');
 
 module.exports = {
-	createAuthToken(userId) {
+	createAccessToken(userId) {
 		return jwt.sign({ id: userId }, controlString, { expiresIn: '6h' });
 	},
+  verifyAccessToken(token) {
+	  return jwt.verify(token, controlString);
+  },
 	createServiceToken() {
 		let randomString = (+new Date).toString(36).slice(-10) + Math.random().toString(36).slice(-10);
 		let hash = bcrypt.hashSync(randomString, 10);
@@ -15,11 +18,5 @@ module.exports = {
 	},
 	createHashFromPassword(password) {
 		return bcrypt.hashSync(password, 10);
-	},
-	validateEmail(value) {
-		return /^\S+@\S+\.\S{2,10}$/.test(value)
-	},
-	validatePassword(value) {
-		return /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[\w])[\w]{6,14}$/.test(value)
 	}
 };
