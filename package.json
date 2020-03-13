@@ -7,7 +7,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node /app/server/bin/www",
+    "start": "node server/bin/www",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "dev:server": "nodemon server/bin/www",
